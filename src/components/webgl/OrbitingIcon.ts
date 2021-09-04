@@ -16,7 +16,8 @@ const iconPaths = [
     'git.svg',
     'svelte.png',
     'python.svg',
-    'GCP.png'
+    'GCP.png',
+    'mssql.png',
 ];
 export class OrbitingIcon {
     readonly planeAngle = this.rand(0, Math.PI / 2.5, true);
