@@ -1,10 +1,9 @@
 <script>
-	import Background from '../components/webgl/Background.svelte';
+	import Background from '../components/webgl/background.svelte';
+	import CenterPane from '../components/simple/centerPane.svelte';
 </script>
 
-
-<div class="h-full w-full, content-center">
-	<div class="">
-		<p>Hi, I'm Jake!</p>
-	</div>
-</div>
+<Background />
+<CenterPane width={300} height={100} center>
+	<p class="text-3xl font-bold opacity-100">Hi, I'm Jake!</p>
+</CenterPane>

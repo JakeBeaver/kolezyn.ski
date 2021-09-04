@@ -2,8 +2,13 @@
 import adapter from '@sveltejs/adapter-static';
 
 import preprocess from 'svelte-preprocess';
+import { windi } from 'svelte-windicss-preprocess';
+
 export default {
-	preprocess: preprocess(),
+	preprocess: [
+		windi({}),
+		preprocess(),
+	],
 	kit: {
 		adapter: adapter({
 			// default options are shown

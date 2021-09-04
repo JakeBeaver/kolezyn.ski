@@ -7,7 +7,7 @@
 	onMount(()=>animate(error, orbitCamera));
 </script>
 
-<canvas name="index" id="bg" />
+<canvas class="" name="index" id="bg" />
 
 <style>
 	canvas {

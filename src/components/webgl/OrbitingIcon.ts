@@ -1,4 +1,4 @@
-import { Matrix4, Scene, Spherical, Sprite, SpriteMaterial, TextureLoader, Vector3 } from 'three';
+import { Matrix4, Scene, Spherical, Sprite, SpriteMaterial, TextureLoader, Texture, Vector3 } from 'three';
 const iconPaths = [
     'angular.svg',
     'cs.svg',
@@ -14,13 +14,16 @@ const iconPaths = [
     'jenkins.svg',
     'dotnet.svg',
     'git.svg',
-    'svelte.png'
+    'svelte.png',
+    'python.svg',
+    'GCP.png'
 ];
 export class OrbitingIcon {
     readonly planeAngle = this.rand(0, Math.PI / 2.5, true);
     readonly phaseOffset = this.rand(0, Math.PI);
     readonly speed = this.rand(0.005, 0.01, true);
     readonly sprite: Sprite;
+    ready = false;
     frame = 0;
     constructor(
         iconPath: string,
@@ -28,14 +31,17 @@ export class OrbitingIcon {
         private scale: number,
         private orbitCenter: Vector3
     ) {
-        const texture = new TextureLoader().load(`/images/${iconPath}`,
+        const texture: Texture = (new TextureLoader().load(`/images/${iconPath}`,
             () => {
                 let aspectRatio = texture.image.height / texture.image.width;
                 this.sprite.scale.set(
                     this.scale / Math.max(aspectRatio, 1),
                     this.scale * Math.min(aspectRatio, 1),
                     1);
-            });
+                this.ready = true;
+            }));
+
+        
         const material = new SpriteMaterial({ map: texture });
         this.sprite = new Sprite(material);
         this.orbitFrame();

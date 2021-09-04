@@ -30,11 +30,9 @@ export function animate(error: boolean, orbitCamera: boolean) {
     const ambientLight = new AmbientLight(0x444444);
     pointLight.position.set(20, 20, 20);
 
-    scene.add(pointLight, ambientLight);
     let swarm = orbitCamera
         ? new OrbitingIconSwarm(70, 8, new Vector3(0, 0, 30))
         : new OrbitingIconSwarm(15, 2);
-    swarm.addToScene(scene);
     const cubes: Mesh[] = [];
 
     let cubeSize = 8;
@@ -42,6 +40,7 @@ export function animate(error: boolean, orbitCamera: boolean) {
     const material = new MeshStandardMaterial({
         color: error ? 0xff2222 : 0x00f0f0
     });
+
     cubes.push(new Mesh(geometry, material));
     if (error) {
         let cs = cubeSize + 0.005;
@@ -55,12 +54,13 @@ export function animate(error: boolean, orbitCamera: boolean) {
         cubes.push(stickers);
     }
 
-    window.onresize = () => {
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-    };
     scene.add(...cubes);
+    swarm.addToScene(scene);
+    scene.add(pointLight, ambientLight);
+
+
+
+    renderer.render(scene, camera);
     function animate() {
         requestAnimationFrame(animate);
         for (let cube of cubes) {
@@ -70,5 +70,11 @@ export function animate(error: boolean, orbitCamera: boolean) {
         swarm.Animate();
         renderer.render(scene, camera);
     }
+    window.onresize = () => {
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+    };
     animate();
+
 }
