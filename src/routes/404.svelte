@@ -1,6 +1,12 @@
 <script lang="ts">
-	import Background from '../components/webgl/background.svelte';
+	import IconSwarm from '../components/simpleKinematics/iconSwarm.svelte';
+	import Cube from '../components/simpleKinematics/cube.svelte';
 </script>
 
 <svelte:head><title>= O</title></svelte:head>
-<Background error />
+
+<IconSwarm>
+	<Cube color="rgba(255,34,34,0.8)">
+		<img src="/images/404.png" alt="404" />
+	</Cube>
+</IconSwarm>

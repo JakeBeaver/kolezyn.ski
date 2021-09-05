@@ -55,7 +55,7 @@ export function animate(error: boolean, orbitCamera: boolean) {
     }
 
     scene.add(...cubes);
-    swarm.addToScene(scene);
+    // swarm.addToScene(scene);
     scene.add(pointLight, ambientLight);
 
 

@@ -1,15 +1,16 @@
-<script>
-	import Background from '../components/webgl/background.svelte';
-	import CenterPane from '../components/simple/centerPane.svelte';
+<script lang="ts">
+	import CenterPane from '../components/simple/CenterPane.svelte';
+	import IconSwarm from '../components/simpleKinematics/iconSwarm.svelte';
+	import Cube from '../components/simpleKinematics/cube.svelte';
 	import { fly } from 'svelte/transition';
 	import { circOut } from 'svelte/easing';
+
 	let show = true;
 </script>
 
-<Background />
 
 {#if show}
-	<div out:fly={{duration:1000, y:-100, easing: circOut}}>
+	<div out:fly={{ duration: 1000, y: -100, easing: circOut }}>
 		<CenterPane
 			on:click={(x) => {
 				show = false;
@@ -22,3 +23,7 @@
 		</CenterPane>
 	</div>
 {/if}
+
+<IconSwarm>
+	<Cube />
+</IconSwarm>
