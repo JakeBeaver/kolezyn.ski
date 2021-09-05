@@ -29,7 +29,7 @@
 
 {#each iconPaths as path}
 	<Orbiting {orbitCenter} {radius}>
-		<img src={`/images/${path}`} width="40" alt={path} />
+		<img src={`/images/skills/${path}`} width="40" alt={path} />
 	</Orbiting>
 {/each}
 

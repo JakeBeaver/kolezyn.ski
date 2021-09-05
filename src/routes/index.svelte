@@ -1,29 +1,41 @@
 <script lang="ts">
-	import CenterPane from '../components/simple/CenterPane.svelte';
+	import Center from '../components/simple/center.svelte';
+	import Pane from '../components/simple/pane.svelte';
+	import Sites from '../components/simple/sites.svelte';
 	import IconSwarm from '../components/simpleKinematics/iconSwarm.svelte';
 	import Cube from '../components/simpleKinematics/cube.svelte';
 	import { fly } from 'svelte/transition';
 	import { circOut } from 'svelte/easing';
+	import { zIndex } from '../helpers/zIndexCalculator';
 
 	let show = true;
 </script>
 
-
-{#if show}
-	<div out:fly={{ duration: 1000, y: -100, easing: circOut }}>
-		<CenterPane
-			on:click={(x) => {
-				show = false;
-			}}
-			width={300}
-			height={100}
-			center
-		>
-			<p class="text-3xl font-bold opacity-100">Hi, I'm Jake!</p>
-		</CenterPane>
-	</div>
-{/if}
-
 <IconSwarm>
 	<Cube />
 </IconSwarm>
+<div class="fixed" style="z-index:{zIndex(1)}">
+	{#if show}
+		<Center>
+			<div out:fly={{ duration: 1000, y: -100, easing: circOut }}>
+				<Pane
+					on:click={(x) => {
+						show = false;
+					}}
+					width={300}
+					height={100}
+				>
+					<p class="text-3xl font-bold opacity-100">Hi, I'm Jake!</p>
+				</Pane>
+			</div>
+		</Center>
+	{:else}
+		<Center>
+			<div in:fly={{ delay: 500, duration: 1000, y: 100, easing: circOut }}>
+				<Pane width={350} height={150}>
+					<Sites />
+				</Pane>
+			</div>
+		</Center>
+	{/if}
+</div>

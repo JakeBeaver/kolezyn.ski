@@ -33,8 +33,8 @@
 
 <style>
 	.cube {
-		-webkit-transform-style: preserve-3d;
-		-webkit-animation: spin 10s infinite linear;
+		transform-style: preserve-3d;
+		animation: spin 10s infinite linear;
 		position: relative;
 		width: 100px;
 		height: 100px;
@@ -55,39 +55,39 @@
 	}
 
 	.cube div.top {
-		-webkit-transform: rotateX(90deg);
+		transform: rotateX(90deg);
 		margin-top: -50px;
 	}
 
 	.cube div.right {
-		-webkit-transform: rotateY(90deg);
+		transform: rotateY(90deg);
 		margin-left: 50px;
 	}
 
 	.cube div.bottom {
-		-webkit-transform: rotateX(-90deg);
+		transform: rotateX(-90deg);
 		margin-top: 50px;
 	}
 
 	.cube div.left {
-		-webkit-transform: rotateY(-90deg);
+		transform: rotateY(-90deg);
 		margin-left: -50px;
 	}
 
 	.cube div.front {
-		-webkit-transform: translateZ(50px);
+		transform: translateZ(50px);
 	}
 
 	.cube div.back {
-		-webkit-transform: translateZ(-50px) rotateX(180deg);
+		transform: translateZ(-50px) rotateX(180deg);
 	}
 
-	@-webkit-keyframes spin {
+	@keyframes spin {
 		0% {
-			-webkit-transform: rotateX(-20deg) rotateY(20deg);
+			transform: rotateX(-20deg) rotateY(20deg);
 		}
 		100% {
-			-webkit-transform: rotateX(700deg) rotateY(740deg);
+			transform: rotateX(700deg) rotateY(740deg);
 		}
 	}
 </style>
