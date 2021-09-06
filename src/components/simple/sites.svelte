@@ -17,8 +17,8 @@
 
 <div class="justify-around flex flex-grow">
 	{#each sites as site}
-		<a class="inline max-w-50 float-left" href={site.url}>
+		<a class="inline max-w-50 float-left" href={site.url} rel="noopener noreferrer" target="_blank">
 			<img src={`/images/sites/${site.image}`} alt={site.name} width="50" height="50" />
-        </a>
+		</a>
 	{/each}
 </div>

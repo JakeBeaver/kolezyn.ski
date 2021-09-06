@@ -7,8 +7,15 @@
 	import { fly } from 'svelte/transition';
 	import { circOut } from 'svelte/easing';
 	import { zIndex } from '../helpers/zIndexCalculator';
+	import { onMount } from 'svelte';
 
 	let show = true;
+	onMount(() => {
+		setTimeout(() => {
+			show = false;
+		}, 2000);
+		return () => {};
+	});
 </script>
 
 <IconSwarm>
