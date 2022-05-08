@@ -5,7 +5,7 @@
 	export let orbitCenter: Position = new Position(0, 0, 0);
 	export let radius: number = 25;
 
-	const iconPaths = [
+	const iconFullPaths = [
 		'angular.svg',
 		'cs.svg',
 		'vscode.svg',
@@ -23,13 +23,16 @@
 		'svelte.png',
 		'python.svg',
 		'GCP.png',
-		'mssql.png'
+		'mssql.png',
+		'postgres.svg'
 	];
+
+	var iconPaths = iconFullPaths.map(path=>`/images/skills/${path}`);
 </script>
 
 {#each iconPaths as path}
 	<Orbiting {orbitCenter} {radius}>
-		<img src={`/images/skills/${path}`} width="40" alt={path} />
+		<img src={path} width="40" alt={path} />
 	</Orbiting>
 {/each}
 
