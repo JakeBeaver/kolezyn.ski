@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { logIn, logOut, user } from './firebase.js';
+	import { logIn, logOut, user } from '../../utils/auth/firebase';
 	const googleImgLink = 'https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg';
 </script>
 
