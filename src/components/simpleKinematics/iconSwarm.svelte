@@ -24,7 +24,8 @@
 		'python.svg',
 		'GCP.png',
 		'mssql.png',
-		'postgres.svg'
+		'postgres.svg',
+		'redux.svg',
 	];
 
 	var iconPaths = iconFullPaths.map(path=>`/images/skills/${path}`);
