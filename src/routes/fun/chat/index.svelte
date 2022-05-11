@@ -5,6 +5,7 @@
 	import Pane from '../../../components/simple/pane.svelte';
 	import UserContext from '../../../components/auth/userContext.svelte';
 	import LoginButton from '../../../components/auth/loginButton.svelte';
+	import PostMessage from '../../../components/chat/postMessage.svelte'
 </script>
 
 <div class="goToCorner">
@@ -26,18 +27,8 @@
 				</Pane>
 			</div>
 		{:else}
-			<div
-				in:scale={{
-					delay: 50,
-					duration: 1500,
-					start: 2,
-					easing: elasticOut
-				}}
-			>
-				<Pane width={300} height={100}>
-					<p class="text-2xl font-bold opacity-100">There'll be something to write here maybe</p>
-				</Pane>
-			</div>{/if}
+			<PostMessage />
+		{/if}
 	</UserContext>
 </Center>
 

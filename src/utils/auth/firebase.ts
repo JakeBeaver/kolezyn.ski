@@ -1,23 +1,21 @@
 import { derived, writable } from 'svelte/store';
 import { signInWithPopup, GoogleAuthProvider, signOut } from '@firebase/auth';
+import type { OAuthCredential, UserCredential } from '@firebase/auth';
 import { LS } from '../localStorage/LS';
 import { auth, provider } from './firebaseConfig';
 
 interface User {
 	isLoggedIn: boolean;
-	name: string;
-	email: string;
-	photoURL: string;
+	name?: string;
+	email?: string;
+	photoURL?: string;
+	uid?: string;
+	accessToken?: string;
 }
 const LSKey = 'google_auth';
 class CredentialData {
 	static store = writable(CredentialData.fromStorage());
-	static readonly initUserState: User = {
-		isLoggedIn: false,
-		name: '',
-		email: '',
-		photoURL: ''
-	};
+	static readonly initUserState: User = { isLoggedIn: false };
 	static empty(): CredentialData {
 		return new CredentialData(null, null);
 	}
@@ -27,7 +25,10 @@ class CredentialData {
 		const { result, credential } = stored;
 		return new CredentialData(result, credential);
 	}
-	public constructor(private readonly result, private readonly credential) {}
+	public constructor(
+		private readonly result: UserCredential,
+		private readonly credential: OAuthCredential
+	) {}
 
 	public save() {
 		const { result, credential } = { ...this };
@@ -46,7 +47,9 @@ class CredentialData {
 					isLoggedIn: true,
 					name: this.result.user.displayName,
 					email: this.result.user.email,
-					photoURL: this.result.user.photoURL
+					photoURL: this.result.user.photoURL,
+					uid: this.result.user.uid,
+					accessToken: this.credential.accessToken,
 			  };
 	}
 }
@@ -56,7 +59,6 @@ export const logOut = () => signOut(auth).then(() => CredentialData.empty().save
 export const logIn = () =>
 	signInWithPopup(auth, provider)
 		.then((result) => {
-			
 			// This gives you a Google Access Token. You can use it to access the Google API.
 			const googleCredential = GoogleAuthProvider.credentialFromResult(result);
 			new CredentialData(result, googleCredential).save();
