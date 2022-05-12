@@ -3,12 +3,12 @@
 	const googleImgLink = 'https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg';
 </script>
 
-{#if $user.isLoggedIn}
+{#if $user}
 	<button class="fire-button" on:click={logOut}>
 		<span class="img-wrapper">
-			<img class="profile-img" alt={$user.name} src={$user.photoURL} />
+			<img class="profile-img" alt={$user.displayName} src={$user.photoURL} />
 		</span>
-		<span class="text text-long">{$user.name} (Sign&nbsp;out)</span>
+		<span class="text text-long">{$user.displayName} (Sign&nbsp;out)</span>
 		<span class="text text-short">Sign&nbsp;out</span>
 	</button>
 {:else}
