@@ -2,6 +2,7 @@
 	import { publishMessage } from '../../utils/rtdb/rtdb';
 	import { Button, FormGroup, Icon, Input, Label, Spinner, Styles } from 'sveltestrap';
 	import { derived, writable } from 'svelte/store';
+	import { auth } from '../../utils/auth/firebaseConfig';
 
 	let message = '';
 	enum status {
@@ -11,15 +12,18 @@
 		fail
 	}
 	let publishing = writable(status.init);
-
+	
+	export let uid = auth.currentUser.uid;
+	
 	async function publish() {
 		publishing.set(status.sending);
 		try {
-			await publishMessage(message);
+			await publishMessage(message, uid);
 			publishing.set(status.success);
 			message = '';
-		} catch {
+		} catch (error) {
 			publishing.set(status.fail);
+			console.log(JSON.stringify(error));
 		}
 	}
 

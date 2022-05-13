@@ -1,6 +1,6 @@
 import { browser } from '$app/env';
 
-export class LS {
+class LS {
 	static get<T>(key: string) {
 		if (!browser)
 			return null;
