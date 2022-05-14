@@ -34,7 +34,6 @@ function unsub() {
 	off(dbrefAll());
 	for (const uid of usedUids) {
 		off(dbref(uid));
-		console.log("detatching " + uid);
 	}
 	usedUids = [];
 }
@@ -78,7 +77,7 @@ interface Message {
 }
 
 function parse(x, uid: string): MessageSlot {
-	const parsed = Object.values(x) as Message[];
+	const parsed = Object.values(x ?? []) as Message[];
 	for (let item of parsed) {
 		item.timestamp = new Date(item.timestamp);
 	}
@@ -86,9 +85,9 @@ function parse(x, uid: string): MessageSlot {
 	return {
 		messages: parsed,
 		uid: uid,
-		email: first.email,
-		name: first.name,
-		pic: first.pic
+		email: first?.email,
+		name: first?.name,
+		pic: first?.pic
 	};
 }
 
@@ -109,7 +108,6 @@ function attachStore(snapshot: Writable<MessageSlot[]>): Writable<MessageSlot[]>
 }
 
 function attachAsAdmin(snapshot: Writable<MessageSlot[]>) {
-	console.log("attaching as admin");
 	onValue(dbrefAll(), (x) => {
 		const val = x.val();
 		const uids = Object.keys(val);
@@ -121,7 +119,6 @@ function attachAsAdmin(snapshot: Writable<MessageSlot[]>) {
 }
 
 function attachAsUser(snapshot: Writable<MessageSlot[]>, uid: string) {
-	console.log("attaching as user");
 	return onValue(dbref(uid), (x) => {
 		const parsed = parse(x.val(), uid);
 		snapshot.set([parsed]);
