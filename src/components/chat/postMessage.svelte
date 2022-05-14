@@ -23,7 +23,6 @@
 			message = '';
 		} catch (error) {
 			publishing.set(status.fail);
-			console.log(JSON.stringify(error));
 		}
 	}
 

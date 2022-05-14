@@ -16,7 +16,6 @@ slots.subscribe((slots) => {
 	if (slots.length === 1) {
 		selectedUid.set(slots[0].uid);
 	}
-	console.log(slots);
 });
 
 onAuthStateChanged(auth, (u) => {
