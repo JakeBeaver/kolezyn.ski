@@ -37,53 +37,59 @@
 				easing: circOut
 			}}
 		>
-			<Pane width={300} height={100}>
-				<p class="text-3xl font-bold opacity-100">Sign in to chat</p>
+			<Pane width={200} height={100}>
+				<p class="text-3xl font-bold opacity-100">Sign in to access chat</p>
 			</Pane>
 		</div>
 	</Center>
 {:else}
-	<Container>
-		<Row>
-			{#if $hasOptions}
-				<Col sm="4">
-					{#each $slots as slot}
-						<Card
-							color={$selectedUid === slot.uid ? 'secondary' : 'light'}
-							on:click={() => selectedUid.set(slot.uid)}
-						>
-							<div class="cont">
-								<span class="float-left">
-									<UserIcon user={{ name: slot.name, uri: slot.pic }} />
-									<span class="text">
-										{slot.name}
+	<div class="wrapper">
+		<Container>
+			<Row>
+				{#if $hasOptions}
+					<Col sm="4">
+						{#each $slots as slot}
+							<Card
+								color={$selectedUid === slot.uid ? 'secondary' : 'light'}
+								on:click={() => selectedUid.set(slot.uid)}
+							>
+								<div class="cont">
+									<span class="float-left">
+										<UserIcon user={{ name: slot.name, uri: slot.pic }} />
+										<span class="text">
+											{slot.name}
+										</span>
+										<span>
+											({slot.email})
+										</span>
 									</span>
-									<span>
-										({slot.email})
+									<span class="float-right badge">
+										<Badge color={$selectedUid !== slot.uid ? 'secondary' : 'light'}
+											>{slot.messages.length.toString()}</Badge
+										>
 									</span>
-								</span>
-								<span class="float-right badge">
-									<Badge color={$selectedUid !== slot.uid ? 'secondary' : 'light'}
-										>{slot.messages.length.toString()}</Badge
-									>
-								</span>
-							</div>
-						</Card>
-					{/each}
-					<div class="h-6" />
-				</Col>
-			{/if}
-			{#if $isUserSelected}
-				<Col sm={$hasOptions ? '8' : '12'}>
-					<ViewMessages />
-					<PostMessage uid={$selectedUid} />
-				</Col>
-			{/if}
-		</Row>
-	</Container>
+								</div>
+							</Card>
+						{/each}
+						<div class="h-6" />
+					</Col>
+				{/if}
+				{#if $isUserSelected}
+					<Col sm={$hasOptions ? '8' : '12'}>
+						<ViewMessages />
+						<PostMessage uid={$selectedUid} />
+					</Col>
+				{/if}
+			</Row>
+		</Container>
+	</div>
 {/if}
 
 <style>
+	.wrapper{
+		padding-bottom:15px
+	}
+
 	.badge {
 		font-size: 30;
 	}

@@ -12,7 +12,7 @@
 			class:r={message.email === $user.email}
 			class:l={message.email !== $user.email}
 		>
-			<Card inverse color={message.email === $user.email ? 'primary' : 'success'}>
+			<Card inverse color={message.email === $user.email ? 'success' : 'secondary'}>
 				<span class="table-cell content">
 					{#if message.email !== $user.email }
 					<UserIcon user={{ name: message.name, uri: message.pic }} />
@@ -20,6 +20,9 @@
 					<span class="text">
 						{message.message}
 					</span>
+				</span>
+				<span class="date">
+					{message.timestamp.toLocaleString()}
 				</span>
 			</Card>
 		</div>
@@ -50,5 +53,10 @@
 		display: table-cell;
 		padding: 5px;
 		margin-left: 10px;
+		color: white;
+	}
+	.date{
+		font-size: 10;
+		margin: 0 4 2 4
 	}
 </style>
