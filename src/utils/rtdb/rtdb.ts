@@ -94,7 +94,9 @@ async function checkIsAdmin() {
 	try {
 		await get(dbrefAdmin());
 		return true;
-	} catch {
+	} catch (error){
+		if (error.toString().indexOf('Client is offline.') > -1)
+			throw error;
 		return false;
 	}
 }
