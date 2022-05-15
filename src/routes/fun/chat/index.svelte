@@ -12,14 +12,15 @@
 	import { selectedUid, slots } from '../../../utils/rtdb/rtdb';
 	import { derived } from 'svelte/store';
 	import UserIcon from '../../../components/auth/userIcon.svelte';
+	import ReCaptchaV3 from '../../../utils/auth/ReCaptchaV3.svelte';
 	let hasJs;
 	const isUserSelected = derived(selectedUid, (x) => !!x);
 	const hasOptions = derived(slots, (x) => x.length > 1);
 </script>
 
-<Card>
-	<slot />
-</Card>
+<ReCaptchaV3 />
+
+
 
 <div class="goToCorner">
 	<LoginButton />
@@ -86,8 +87,8 @@
 {/if}
 
 <style>
-	.wrapper{
-		padding-bottom:15px
+	.wrapper {
+		padding-bottom: 15px;
 	}
 
 	.badge {

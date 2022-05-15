@@ -1,7 +1,6 @@
 import { initializeApp } from '@firebase/app';
 import { getAuth, GoogleAuthProvider } from '@firebase/auth';
 
-
 const firebaseConfig = {
 	apiKey: 'AIzaSyBDEc9908mKjEQiDaHHEq_57xBAa2ipt44',
 	authDomain: 'kolezyn.ski',
@@ -12,11 +11,7 @@ const firebaseConfig = {
 	appId: '1:75991988600:web:fc1b16dc183969d797308d',
 	measurementId: 'G-H2CGN2RXN1'
 };
-initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 export const provider = new GoogleAuthProvider();
-provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
 export const auth = getAuth();
 auth.languageCode = 'it';
-export function ensureAuthentication(){
-	if (!auth.currentUser) throw("<ViewMessage> cannot be mounted without authenticated user!");
-}
